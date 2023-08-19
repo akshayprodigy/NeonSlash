@@ -50,7 +50,7 @@ public class Blade : MonoBehaviour
             ContinueSlice();
         }
     }
-    Vector3 initmousePosition
+    Vector3 initmousePosition;
 
     private void StartSlice()
     {
