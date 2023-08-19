@@ -16,10 +16,10 @@ public class SpawnObjects : MonoBehaviour
     public void SpawnObject()
     {
         //Debug.Log("beatObject: " + initiallaunchPosition.Length);
-        // GameObject beatObject = GameManager.Instance.GetObstacle();
-       
+        GameObject beatObject = GameManager.Instance.GetObstacle();
 
-       // beatObject.GetComponent<BeatObject>().MoveBeatObject(transform.position, initiallaunchPosition[Random.Range(0, initiallaunchPosition.Length)].transform.position);
+
+        beatObject.GetComponent<BeatObject>().MoveBeatObject(transform.position, initiallaunchPosition[Random.Range(0, initiallaunchPosition.Length)].transform.position);
 
     }
 }

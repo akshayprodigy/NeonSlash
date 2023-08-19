@@ -12,10 +12,16 @@ public class BeatObjectSpawner : MonoBehaviour
     private float sampleRate;
     [SerializeField]
     private GameObject[] SpawnPoints;
+
+    public float minInterval = 0.5f;  // Minimum time interval in seconds
+    public float maxInterval = 0.9f;
+    public bool isMusicPlaying = false;
+
     void Start()
     {
         // Retrieve the sample rate on the main thread
         sampleRate = AudioSettings.outputSampleRate;
+        StartCoroutine(RandomCallCoroutine());
     }
 
     void OnAudioFilterRead(float[] data, int channels)
@@ -39,12 +45,28 @@ public class BeatObjectSpawner : MonoBehaviour
         }
     }
 
-    void Update()
+    //void Update()
+    //{
+    //    if (beatIndex < beatTimes.Count && Time.time >= beatTimes[beatIndex])
+    //    {
+    //        SpawnBeatObject();
+    //        beatIndex++;
+    //    }
+    //}
+
+
+    private IEnumerator RandomCallCoroutine()
     {
-        if (beatIndex < beatTimes.Count && Time.time >= beatTimes[beatIndex])
+        while (isMusicPlaying)
         {
+            // Calculate a random interval
+            float randomInterval = Random.Range(minInterval, maxInterval);
+
+            // Wait for the random interval
+            yield return new WaitForSeconds(randomInterval);
+
+            // Call the function
             SpawnBeatObject();
-            beatIndex++;
         }
     }
 

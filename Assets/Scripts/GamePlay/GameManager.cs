@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     GameObject beatObjectPrefab;
-    protected GameObject[] cachedObstacles;
+    //protected GameObject[] cachedObstacles;
+    private Queue<GameObject> cachedObstacles = new Queue<GameObject>();
+
 
 
     private void Start()
@@ -18,9 +20,21 @@ public class GameManager : MonoBehaviour
             Instance = null;
         Instance = this;
     }
+
+
     public GameObject GetObstacle()
     {
-         GameObject beatObject = Instantiate(beatObjectPrefab, transform.position, transform.rotation);
+        GameObject beatObject;
+        if (cachedObstacles.Count == 0)
+        {
+            beatObject = Instantiate(beatObjectPrefab, transform.position, transform.rotation);
+        }
+        else
+        {
+            beatObject = cachedObstacles.Dequeue();
+
+        }
+         
         return beatObject;
     }
 
