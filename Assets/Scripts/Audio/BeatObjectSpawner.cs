@@ -21,6 +21,12 @@ public class BeatObjectSpawner : MonoBehaviour
     {
         // Retrieve the sample rate on the main thread
         sampleRate = AudioSettings.outputSampleRate;
+        PlayMusic();
+    }
+
+    public void PlayMusic()
+    {
+        isMusicPlaying = true;
         StartCoroutine(RandomCallCoroutine());
     }
 

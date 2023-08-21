@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject beatObjectPrefab;
     //protected GameObject[] cachedObstacles;
-    private Queue<GameObject> cachedObstacles = new Queue<GameObject>();
+    [SerializeField]
+    Queue<GameObject> cachedObstacles = new();
 
 
 
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
         else
         {
             beatObject = cachedObstacles.Dequeue();
+            beatObject.transform.position = transform.position;
+            beatObject.transform.rotation = transform.rotation;
 
         }
          
@@ -39,5 +42,10 @@ public class GameManager : MonoBehaviour
     }
 
     // need to implement object pooling
+
+    public void ObstableDestroyed(GameObject obstacle)
+    {
+        cachedObstacles.Enqueue(obstacle);
+    }
 
 }
